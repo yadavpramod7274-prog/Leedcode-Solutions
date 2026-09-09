@@ -9,22 +9,23 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
 class Solution {
 public:
-  int maxDia=0;
-  int Level(TreeNode* root){
+       int maxDia=0;
+ int level(TreeNode* root){
     if(root==NULL) return 0;
-   
-     return 1+ max( Level(root->left), Level(root->right));
-    }
-    int diameterOfBinaryTree(TreeNode* root) {
-         if(root==NULL) return 0;
-    int dia= Level(root->left)+ Level(root->right);
-     maxDia=max(maxDia,dia);
-      diameterOfBinaryTree(root->left);
+   return 1+max(level(root->left),level(root->right));
 
-      diameterOfBinaryTree(root->right);
-       return maxDia;
+   }
+   
+    int diameterOfBinaryTree(TreeNode* root) {
+        if(root==NULL) return 0;
+        int m=level(root->left)+level(root->right);
+         maxDia= max( maxDia,m);
+        diameterOfBinaryTree(root->left);
+        diameterOfBinaryTree(root->right);
+         
+         return maxDia;
+       
     }
 };
