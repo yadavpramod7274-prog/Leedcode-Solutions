@@ -1,23 +1,21 @@
 
 class Solution {
 public:
- long long maxTree(TreeNode* root){
-    if(root==NULL) return LLONG_MIN;
-    // int left= maxTree(root->left);
-    // int right= maxTree(root->right);
-    return max((long long)root->val,max(maxTree(root->left),maxTree(root->right)));
- }
-  long long minTree(TreeNode* root){
-    if(root==NULL) return LLONG_MAX; 
-    
-    return min( (long long)root->val,min(minTree(root->left),minTree(root->right)));
- }
-    bool isValidBST(TreeNode* root) {
-         if(root==NULL) return true;
+void  Inorder(TreeNode* root, vector<int> &ans){
+    if(root==NULL) return;  // base case
+     Inorder(root->left,ans); // call1
+      ans.push_back(root->val);// work
+     Inorder(root->right,ans); // call2
 
-       //  else if(root->left==NULL || root->right==NULL) return true;
-      else if((long long)root->val <= maxTree(root->left)) return false;
-     else if((long long)root->val >= minTree(root->right)) return false;
-        return isValidBST(root->left) && isValidBST(root->right) ;
+  }
+    bool isValidBST(TreeNode* root) {
+     
+      vector<int>ans;
+     
+      Inorder(root,ans);
+       for(int i=1;i<ans.size();i++){
+        if(ans[i]<=ans[i-1])return false;
+       }
+       return true;
     }
 };
