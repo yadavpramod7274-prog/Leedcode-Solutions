@@ -1,25 +1,27 @@
 
 class Solution {
 public:
-  TreeNode* buildTree(vector<int>& pre,int prelo,int prehi,  vector<int>& in,int inlo,int inhi){
-    if(prelo>prehi) return NULL;
-     TreeNode* root=new TreeNode(pre[prelo]);
-       if(prelo==prehi) return root;
-       int i= inlo;
-         while(i<=inhi){
-            if(in[i]==pre[prelo]) break;
-                i++;
-         }  
-         int leftcount= i-inlo;
-          int rightcount = inhi-i;
-            root->left = buildTree(pre,prelo+1,prelo+leftcount,in,inlo,i-1); 
-           root->right = buildTree(pre,prelo+leftcount+1,prehi,in,i+1,inhi);
-                return root; 
-}
+        void insert(TreeNode* root,int val){
+             if(root==NULL) root= new TreeNode(val);
+              else if(root->val > val){ // go left
+                if(root->left == NULL){ // attach it here
+                    root->left = new TreeNode(val);
+                }
+                 else insert(root->left,val);
+              }
+                 else{
+                    if(root->right == NULL){
+                        root->right = new TreeNode(val);
+                    }
+                    else insert(root->right,val);
+                 
+              }
+        }
     TreeNode* bstFromPreorder(vector<int>& pre) {
-        vector<int>in = pre; // copy ban gayi;
-         sort(in.begin(),in.end());
-          int n =pre.size();
-         return buildTree(pre,0,n-1,in,0,n-1);
+        TreeNode* root= new TreeNode(pre[0]);
+         for(int i=1;i<pre.size();i++){
+                 insert(root,pre[i]);
+         } 
+         return root;
     }
 };
