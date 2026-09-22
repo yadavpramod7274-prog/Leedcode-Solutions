@@ -15,50 +15,29 @@ public:
               tempC= tempC->next;
              temp=temp->next;
           }
-          Node* duplicate = dummy->next;       
-             // step 2 alternate connection
-              Node* a=head;
-              Node* b=duplicate;
-              dummy = new Node(-1);
-               Node* tempD= dummy;
-              while(a){
-             tempD->next=a;
-              a=a->next;
-               tempD= tempD->next;
-               tempD->next=b;
-              b=b->next;
-               tempD= tempD->next;
-              }
-             dummy= dummy->next;
-                // step 3 alternate connection
-              Node* t1=dummy;// t1 will traverse in the original list;
-              while(t1 ){
-                Node* t2=t1->next; // t2 is for duplicate;
-                  if(t1->random) t2->random=t1->random->next;
-                  if(t1->next)  t1 = t1->next->next;
-                  
-              }
-              // step 4 -> removing the connection 
-               Node* d1=new Node(-1);
-                Node* d2=new Node(-1);
-                 t1=d1;
-                 Node* t2=d2;
-                  Node* t=dummy;
-                   while(t){
-                   t1->next=t;
-                     t=t->next;
-                    t1=t1->next;
-                   
+          Node* b = dummy->next;       
+             // step 2 make a map of original node
+             Node*a =head;
+            unordered_map<Node*,Node*>m;
+            Node* tempa=a;
+            Node* tempb=b;                
 
-                     t2->next=t;
-                       t=t->next;
-                   t2=t2->next;
-                   
-                   }
-                   t1->next=NULL;
-                    t2->next=NULL;
-                    d1=d1->next;// origin with random
-                    d2=d2->next;
-                     return d2;
+            while(tempa!=NULL){
+                m[tempa] = tempb;
+                 tempa = tempa->next;
+                  tempb = tempb->next;
+            }
+            for(auto x :m){
+                 Node* o=x.first;
+                  Node* d=x.second;
+           
+                   if(o->random!=NULL){ // kaam
+              Node*oRandom = o->random;
+              Node*dRandom = m[o->random];
+                d->random = dRandom;
+            }   
+}
+    return b;         
+              
      }
 };
