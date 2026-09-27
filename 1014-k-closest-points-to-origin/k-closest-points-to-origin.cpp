@@ -16,7 +16,7 @@ public:
              pq.pop() ;
              
                   }
-                  sort(ans.begin(),ans.end());
+               //   sort(ans.begin(),ans.end());
                    return ans;
     }
 };
