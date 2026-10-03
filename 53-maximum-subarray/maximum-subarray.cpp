@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int maxSubArray(vector<int>& arr) {
+ // kedans Algoritham(for max sumarry)
+    int maxSubArray(vector<int>& arr) { 
         int n=arr.size();
          int maxs=INT_MIN;
             int sum=0;
