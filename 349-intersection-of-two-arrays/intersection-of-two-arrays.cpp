@@ -2,18 +2,18 @@ class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
           
-           sort(nums1.begin(),nums1.end());
-            sort(nums2.begin(),nums2.end());
-             vector<int>ans;
-             for(int i=0;i<nums1.size();i++){
-                 for(int j=0;j<nums2.size();j++){
-                    if(nums1[i]==nums2[j]){
-                        if(ans.size()==0 ||ans.back()!=nums1[i]){
-                             ans.push_back(nums1[i]);
-                        }
-                    }
-                 }
-             }
-             return ans;
+         unordered_set<int>st1;
+          for(auto x:nums1){
+            st1.insert(x);
+          }
+          unordered_set<int>st2;
+          for(auto x:nums2){
+            st2.insert(x);
+          }
+          vector<int>ans;
+           for(auto x:st1){
+            if(st2.find(x)!=st2.end()) ans.push_back(x);
+           }
+           return ans;
     }
 };
