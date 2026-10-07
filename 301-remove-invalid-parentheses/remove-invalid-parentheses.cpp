@@ -40,8 +40,7 @@ vector<string> res;
     vector<string> removeInvalidParentheses(string s) {
       
         sol( s,valid(s));
-        //sort(res.begin(),res.end());
-        // res.erase(unique(res.begin(),res.end()),res.end());
+        
         return res;
     }
 };
