@@ -12,7 +12,7 @@ public:
       int x=(n+1)/2;
         long long ans=0;
         for(int i=0;i<n;i++){
-             if(i < n- x) ans-=p[i];
+             if(i <n-x) ans-=p[i];
              else  ans+=p[i];
         }
        return ans;
